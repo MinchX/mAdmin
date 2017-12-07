@@ -3,12 +3,9 @@ layui.config({base:"js/"}).use(['element','jquery'],function(){
 
     function topNav(){
         $.get("../json/menu.json",function(data){
-			if($("#topNav").html()==''){
                 genTopNavHtml(data);
                 element.render("nav");
-            }
-		})
-        
+		});
     }
 
     function genTopNavHtml(data){
@@ -18,9 +15,18 @@ layui.config({base:"js/"}).use(['element','jquery'],function(){
         }else{
             jsonData = data;
         }
-        var ulObj = $('<ul class="layui-nav layui-layout-left" lay-filter="topNav"></ul>');
+        var ulObj = $('<ul class="layui-nav topNavLeft" lay-filter="topNav"></ul>');
+        var wWidth = $(window).width();
+        var showNum = Math.floor((wWidth - 230 - 100)/110)-1;//根据浏览器的显示宽度计算能展示的菜单数量,logo宽度200加折叠按钮30加用户信息200;
+        var moreItem = $('<li class="layui-nav-item" lay-id="more"><a href="javascript:void(0);">更多</a></li>');
+        var moreItemDl = $('<dl class="layui-nav-child"></dl>');
         for(var i=0;i<jsonData.length;i++){
-            var liObj = $('<li class="layui-nav-item" lay-id="'+jsonData[i].id+'"><a href="javascript:void(0);">'+jsonData[i].name+'</a></li>');
+            var liObj = new Object();
+            if (i>showNum){
+                liObj = $('<dd><a href="javascript:void(0);" lay-id="'+jsonData[i].id+'">'+jsonData[i].name+'</a></dd>');
+            }else{
+                liObj = $('<li class="layui-nav-item" lay-id="'+jsonData[i].id+'"><a href="javascript:void(0);">'+jsonData[i].name+'</a></li>');
+            }
             liObj.click(jsonData[i],function(event){
                 var menuData = event.data;
                 if(menuData!=null){
@@ -63,12 +69,30 @@ layui.config({base:"js/"}).use(['element','jquery'],function(){
                 }else{
                     $('#leftNav').html('');
                 }
+                $(".layui-layout-admin").removeClass("hideLeft");
             });
-            ulObj.append(liObj);
+            if(i>showNum){
+                moreItemDl.append(liObj);
+            }else{
+                ulObj.append(liObj);
+            }
         }
+        if (showNum<jsonData.length){
+            moreItem.append(moreItemDl);
+            ulObj.append(moreItem);
+        
+        }
+        $('#topNav').html('');
         $('#topNav').append(ulObj);
     }
 
     topNav();
 
+    $('.hideButton').click(function(){
+        $(".layui-layout-admin").toggleClass("hideLeft");
+    });
+
+    $(window).resize(function(){
+        topNav();
+    })
 });
