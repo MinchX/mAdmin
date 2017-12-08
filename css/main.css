@@ -1,6 +1,6 @@
 .main_body{ min-width: 1000px;}
 .marg0{ margin: 0;}
-.hideButton{ position:absolute!important;left:200px;top:0;width:20px; height:20px; margin:15px 15px 0 0; font-size:17px; text-align:center; padding:5px 5px; color:#fff; background-color:#1AA094; }
+.hideButton{ position:absolute!important;left:200px;top:0;width:20px; height:20px; margin:15px 15px 0 0; font-size:17px; text-align:center; padding:5px 5px; color:#fff; background-color:#4DA2D4; }
 .hideButton:hover{ color:#fff; }
 .topNavLeft{position:absolute!important;left:230px;top:0}
 .sysFrameContent.layui-tab-content {padding: 0px;}
@@ -11,3 +11,23 @@
 .hideLeft.layui-layout-admin .layui-side{left: -200px;}
 .hideLeft .layui-body,.hideLeft .layui-footer{left: 0px;}
 .layui-layout-admin .layui-side{ left:0; }
+.layui-nav-bar{background-color: #4DA2D4}
+.layui-body{overflow:hidden; }
+.layui-header{border-bottom:3px solid #4DA2D4;}
+.layui-tab-brief>.layui-tab-title .layui-this{color: #4DA2D4}
+.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{border-bottom: 2px solid #4DA2D4;}
+.layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after{background-color: #4DA2D4;}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{background-color:#4DA2D4}
+.layui-nav-tree .layui-nav-bar{background-color: #4DA2D4}
+.layui-layout-admin .layui-logo{color: #4DA2FF}
+.layui-layout-admin .layui-header{background-color: #f0f0f0}
+.layui-nav .layui-nav-item a{color: #000}
+.layui-nav .layui-nav-item a:hover{color: #4DA2D4}
+
+.layui-layout-admin .layui-side{background-color: #f0f0f0}
+.layui-bg-light{background-color: #bdbdbd!important}
+.layui-nav-itemed .layui-nav-child{background-color:#f0f0f0!important}
+.layui-nav-tree .layui-nav-item a:hover{background-color:#BBBBBB}
+.layui-nav{background-color:#BBBBBB}
+.layui-nav-itemed>a, .layui-nav-tree .layui-nav-title a, .layui-nav-tree .layui-nav-title a:hover{color: #000!important}
+.layui-side{border-right:2px solid #4DA2D4;}
