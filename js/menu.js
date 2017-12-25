@@ -23,9 +23,9 @@ layui.config({base:"js/"}).use(['element','jquery'],function(){
         for(var i=0;i<jsonData.length;i++){
             var liObj = new Object();
             if (i>showNum){
-                liObj = $('<dd><a href="javascript:void(0);" lay-id="'+jsonData[i].id+'">'+jsonData[i].name+'</a></dd>');
+                liObj = $('<dd><a href="javascript:void(0);" lay-id="'+jsonData[i].id+'">'+jsonData[i].text+'</a></dd>');
             }else{
-                liObj = $('<li class="layui-nav-item" lay-id="'+jsonData[i].id+'"><a href="javascript:void(0);">'+jsonData[i].name+'</a></li>');
+                liObj = $('<li class="layui-nav-item" lay-id="'+jsonData[i].id+'"><a href="javascript:void(0);">'+jsonData[i].text+'</a></li>');
             }
             liObj.click(jsonData[i],function(event){
                 var menuData = event.data;
@@ -48,10 +48,11 @@ layui.config({base:"js/"}).use(['element','jquery'],function(){
                                             }
                                         });
                                         if(!tabFlag){
-                                            element.tabAdd("system_tab",{title:tabData.text,
-                                                content:'<iframe src="/'+tabData.href+'" data-id="'+tabData.id+'"></iframe>',
+                                            element.tabAdd("system_tab",{title:tabData.text+"&nbsp;&nbsp;<i class=\"iconfont icon-close\"></i>",
+                                                content:'<div style="height:'+($(window).height()-144)+'px"><iframe src="'+tabData.href+'" data-id="'+tabData.id+'"></iframe></div>',
                                                 id:tabData.id
                                             });
+                                            bindTabMouseEvent();
                                         }
                                         element.tabChange("system_tab", tabData.id);
                                     });
@@ -92,7 +93,66 @@ layui.config({base:"js/"}).use(['element','jquery'],function(){
         $(".layui-layout-admin").toggleClass("hideLeft");
     });
 
+    //在Window变化的时候重新刷新下导航栏,屏幕变小就收缩导航栏
     $(window).resize(function(){
         topNav();
-    })
+        $(".layui-tab-item div").css("height",($(window).height()-144)+'px');
+    });
+
+    $(".layui-tab-item div").css("height",$(window).height()-144+'px');
+
+    $("body").on("click",".layui-tab li i.icon-close",function(){
+        element.tabDelete('system_tab',$(this).parent('li').attr('lay-id'));
+    });
+
+    bindTabMouseEvent();
+
+    //绑定鼠标右键事件到tab上
+    function bindTabMouseEvent() {
+        $('.rightMenu').bind('contextmenu',function (e) {
+            e.preventDefault();
+            return false;
+        });
+        $('.layui-tab-title li').bind('contextmenu',function (e) {
+            e.preventDefault();
+            return false;
+        }).mousedown(function (e) {
+            if (e.which==3){
+                showRightMenu($(this).attr('lay-id'),e.clientX,e.clientY);
+                return false;
+            }
+        });
+    }
+
+    //显示右键菜单栏
+    function showRightMenu(layId,x,y) {
+        $('.rightMenu').css('left',x).css('top',y).show().attr('layId',layId);
+        $(document).bind('click',function () {
+            $('.rightMenu').hide();
+        })
+
+    }
+
+    //右键菜单刷新按钮
+    $('#refresh').click(function () {
+        $(".sysFrameContent .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload(true);
+    });
+
+    //右键菜单关闭所有按钮
+    $('#closeAll').click(function () {
+        $('.layui-tab-title li').each(function(){
+            if ($(this).attr('lay-id')!="index"){
+                element.tabDelete('system_tab',$(this).attr('lay-id'));
+            }
+        });
+    });
+
+    //右键菜单关闭其他按钮
+    $('#closeOther').click(function () {
+        $('.layui-tab-title li').each(function(){
+            if ($(this).attr('lay-id')!="index"&&$(this).attr('lay-id')!=$('.rightMenu').attr('layId')){
+                element.tabDelete('system_tab',$(this).attr('lay-id'));
+            }
+        });
+    });
 });

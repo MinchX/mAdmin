@@ -3,7 +3,7 @@
 .hideButton{ position:absolute!important;left:200px;top:0;width:20px; height:20px; margin:15px 15px 0 0; font-size:17px; text-align:center; padding:5px 5px; color:#fff; background-color:#4DA2D4; }
 .hideButton:hover{ color:#fff; }
 .topNavLeft{position:absolute!important;left:230px;top:0}
-.sysFrameContent.layui-tab-content {padding: 0px;}
+.sysFrameContent.layui-tab-content {padding: 0px;height: 100%}
 .sysFrameContent.layui-tab-content iframe{ width: 100%;height: 100%;border: none;min-width: 800px;}
 
 .hideLeft .layui-body,.hideLeft .layui-footer,.hideLeft.layui-layout-admin .layui-side,.logo,.top_menu .layui-nav-item[pc],.component,.top_menu .layui-nav-item[mobile],.layui-nav,.layui-layout-admin .layui-main,.site-mobile .layui-side,.layui-layout-admin .layui-side,.site-mobile .site-tree-mobile,.layui-body,.layui-layout-admin .layui-footer,.layui-layout-admin .layui-side,.panel,.panel .panel_icon i{ transition: all 0.3s ease-in-out;-webkit-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out; }
@@ -31,3 +31,11 @@
 .layui-nav{background-color:#BBBBBB}
 .layui-nav-itemed>a, .layui-nav-tree .layui-nav-title a, .layui-nav-tree .layui-nav-title a:hover{color: #000!important}
 .layui-side{border-right:2px solid #4DA2D4;}  
+.layui-tab{height: 100%}
+.layui-tab-item{height: 100%}
+
+.rightMenu{width: 120px;display: none;position:absolute;z-index: 999}
+.rightMenu ul{line-height: 20px;padding: 5px 0;box-shadow: 0 2px 4px rgba(0,0,0,.12);border: 1px solid #D2D2D2;
+    background-color: #fff;border-radius: 2px;white-space: nowrap;font-size: 12px;}
+.rightMenu ul li a:hover{background-color: #F2F2F2}
+.rightMenu ul li a{display:block;padding: 0 10px;}
